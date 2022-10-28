@@ -1,14 +1,17 @@
-# Display Hardcode Value
----
-With Ruby on Rails, this extension display your value of key `Settings` when you hover it.
-Hope useful for you <3
+# 🌿 Display Hardcode Value
+🌱 With Ruby on Rails, this extension display your value of key `Settings` when you hover it.
+
+❤️ Hope this will be useful for you ❤️
 
 ## Demo
 
-### Display value
----
-![[demo-display-hardcode-value.mp4]]
+![Video Demo](/media/demo-display-hardcode-value.gif)
 
-### Refresh data when modified settings.yml
+
+### Contact
+🌱 If you have any issues, please contact me via [anhnh](https://www.facebook.com/profile.php?id=100026527598703). I will reply as soon as see 💪.
+
+😍 Thanks for your support!
+
 ---
-![[update-settings-file.mp4]]
+🌱 Visit to [my blog](https://nhanh.netlify.app/) if you feel interested

@@ -1,9 +1,11 @@
 {
   "name": "display-hardcode-value",
-  "displayName": "display-hardcode-value",
-  "description": "",
+  "displayName": "Display Hardcode Value",
+  "description": "Display Hardcode Value",
   "author": "anhnh",
-  "version": "0.0.1",
+  "icon": "media/icon.png",
+  "publisher": "anhnh-3008",
+  "version": "0.0.4",
   "engines": {
     "vscode": "^1.72.0"
   },
@@ -11,7 +13,8 @@
     "Other"
   ],
   "activationEvents": [
-    "onCommand:display-hardcode-value.display"
+    "onCommand:display-hardcode-value.display",
+    "onLanguage:ruby"
   ],
   "main": "./extension.js",
   "contributes": {
@@ -21,11 +24,12 @@
     }]
   },
   "scripts": {
+    "vscode:prepublish": "npm install",
     "lint": "eslint .",
     "pretest": "npm run lint && npm install",
     "test": "node ./test/runTest.js"
   },
-  "devDependencies": {
+  "dependencies": {
     "@types/vscode": "^1.72.0",
     "@types/glob": "^8.0.0",
     "@types/mocha": "^10.0.0",
@@ -36,5 +40,9 @@
     "typescript": "^4.8.4",
     "js-yaml": "^4.1.0",
     "@vscode/test-electron": "^2.1.5"
-  }
+  },
+  "repository": {
+		"type": "git",
+		"url": "https://github.com/anhnh-3008/display-hardcode-value"
+	  }
 }
