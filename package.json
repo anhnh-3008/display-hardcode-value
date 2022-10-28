@@ -1,7 +1,8 @@
 {
-  "name": "test",
-  "displayName": "test",
+  "name": "display-hardcode-value",
+  "displayName": "display-hardcode-value",
   "description": "",
+  "author": "anhnh",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.72.0"
@@ -10,13 +11,13 @@
     "Other"
   ],
   "activationEvents": [
-    "onCommand:test.helloWorld"
+    "onCommand:display-hardcode-value.display"
   ],
   "main": "./extension.js",
   "contributes": {
     "commands": [{
-      "command": "test.helloWorld",
-      "title": "Hello World"
+      "command": "display-hardcode-value.display",
+      "title": "Display HardCode Value"
     }]
   },
   "scripts": {
