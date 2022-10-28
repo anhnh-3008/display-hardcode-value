@@ -22,7 +22,7 @@
   },
   "scripts": {
     "lint": "eslint .",
-    "pretest": "npm run lint && npm install -g js-yaml",
+    "pretest": "npm run lint && npm install",
     "test": "node ./test/runTest.js"
   },
   "devDependencies": {
@@ -34,6 +34,7 @@
     "glob": "^8.0.3",
     "mocha": "^10.0.0",
     "typescript": "^4.8.4",
+    "js-yaml": "^4.1.0",
     "@vscode/test-electron": "^2.1.5"
   }
 }
