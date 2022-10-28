@@ -7,8 +7,8 @@ Hope useful for you <3
 
 ### Display value
 ---
-![[demo-display-hardcode-value.mp4]]
+![Video Demo](/media/demo-display-hardcode-value.mp4)
 
 ### Refresh data when modified settings.yml
 ---
-![[update-settings-file.mp4]]
+![Refresh Data YML](/media/update-settings-file.mp4)
