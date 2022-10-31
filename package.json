@@ -1,10 +1,11 @@
 {
   "name": "display-hardcode-value",
   "displayName": "Display Hardcode Value",
-  "description": "",
+  "description": "Display Hardcode Value",
   "author": "anhnh",
+  "icon": "media/icon.png",
   "publisher": "anhnh-3008",
-  "version": "0.0.1",
+  "version": "0.0.5",
   "engines": {
     "vscode": "^1.72.0"
   },
@@ -28,7 +29,7 @@
     "pretest": "npm run lint && npm install",
     "test": "node ./test/runTest.js"
   },
-  "devDependencies": {
+  "dependencies": {
     "@types/vscode": "^1.72.0",
     "@types/glob": "^8.0.0",
     "@types/mocha": "^10.0.0",
