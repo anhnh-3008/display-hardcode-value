@@ -3,6 +3,7 @@
 const vscode = require('vscode');
 const fs = require('fs');
 const yaml = require('js-yaml');
+const ymlFile = '/config/settings.yml';
 var contentSettings = '',
 		command_valuable = [],
 		filePath = '';
@@ -59,7 +60,7 @@ function activate(context) {
 // Get path of settings.yml
 function getPathFileSettings() {
 	if(vscode.workspace.workspaceFolders !== undefined) {
-		filePath = vscode.workspace.workspaceFolders[0].uri.path + '/config/settings.yml';
+		filePath = vscode.workspace.workspaceFolders[0].uri.path + ymlFile;
 
 		if (!fs.existsSync(filePath)){
 			filePath = '';
@@ -122,8 +123,11 @@ function getWordAt (str, pos) {
 	pos = Number(pos) >>> 0;
 
 	// Search for the word's beginning and end.
-	var left = str.slice(0, pos + 1).search(/\S+$/),
-			right = str.slice(pos).search(/[!@#\$%\^\&*\)\(+=\/\-\[\]\,\s\{\}\|\\\>\<\?]/);
+	let arr = [];
+	for (var i = 0; i < pos + 1; i++) if (str[i]=="S") arr.push(i);
+	let left =  arr.at(-1);
+
+	let right = str.slice(pos).search(/[!@#\$%\^\&*\)\(+=\/\-\[\]\,\s\{\}\|\\\>\<\?]/);
 
 			// The last word in the string is a special case.
 	if (right < 0) {
