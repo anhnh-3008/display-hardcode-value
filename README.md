@@ -1,4 +1,7 @@
 # 🌿 Display Hardcode Value
+
+- Require version: vscode ~> 1.72.0
+
 🌱 With Ruby on Rails, this extension display your value of key `Settings` when you hover it.
 
 ❤️ Hope this will be useful for you ❤️

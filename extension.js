@@ -3,10 +3,14 @@
 const vscode = require('vscode');
 const fs = require('fs');
 const yaml = require('js-yaml');
-const ymlFile = '/config/settings.yml';
+const _ = require('lodash');
+
+const arrPathFiles = ['/config/settings.yml', '/config/settings.local.yml', '/config/settings/test.yml']
 var contentSettings = '',
-		command_valuable = [],
-		filePath = '';
+		contentSettingsLocal = '',
+		contentSettingsTest = '',
+		arrFilePathExists = [],
+		command_valuable = [];
 
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
@@ -30,7 +34,7 @@ function activate(context) {
 		provideHover(document, position, token) {
 			var command = getWordAt(document.lineAt(position.line).text, position.character);
 			if (command.includes('Settings')) {
-				let value = getValueSettings(contentSettings, command);
+				let value = getValueSettings(document.fileName, command);
 				let content = new vscode.MarkdownString(`<pre style="outline:1px solid #ccc; padding:5px; margin:5px;"><span style="color:#02cf9f;">${command_valuable.join('.')}</span>: ${value}</pre>`);
 				content.supportHtml = true;
 				content.isTrusted = true;
@@ -43,8 +47,8 @@ function activate(context) {
 
 	// Update data yml when modify settings.yml
 	vscode.workspace.onDidSaveTextDocument((e) => {
-    if (e.fileName === filePath) {
-			parseYmlToObject();
+    if (arrFilePathExists.includes(e.fileName)) {
+			parseYmlToObject([e.fileName]);
 		}
 	});
 
@@ -57,34 +61,58 @@ function activate(context) {
 	context.subscriptions.push(disposable);
 }
 
+function getValueSettings(fileName, command) {
+	if (fileName.includes('spec')) return detectValue(contentSettingsTest, command);
+
+	return detectValue(contentSettings, command);
+}
+
 // Get path of settings.yml
 function getPathFileSettings() {
 	if(vscode.workspace.workspaceFolders !== undefined) {
-		filePath = vscode.workspace.workspaceFolders[0].uri.path + ymlFile;
+		arrPathFiles.forEach(path => {
+			let filePath = vscode.workspace.workspaceFolders[0].uri.path + path;
 
-		if (!fs.existsSync(filePath)){
-			filePath = '';
-			vscode.window.showInformationMessage('Not found config/settings.yml in your workspace!')
-		}
+			if (fs.existsSync(filePath)){
+				arrFilePathExists.push(filePath);
+			} else {
+				vscode.window.showInformationMessage(`Not found ${path} in your workspace!`);
+			}
+		});
 	}
 
-	return filePath;
+	return arrFilePathExists;
 }
 
 // Get all data in settings.yml file
 function getDataSettings() {
-	if (getPathFileSettings() === '') return;
+	if (getPathFileSettings().length === 0) return;
 
 	parseYmlToObject();
 }
 
 // Parse data yml to Object by js-yaml
-function parseYmlToObject() {
-	contentSettings = yaml.load(fs.readFileSync(filePath, 'utf-8').replaceAll('!ruby/regexp', 'ruby/regexp'));
+function parseYmlToObject(specifiedFiles = null) {
+	(specifiedFiles || arrFilePathExists).forEach(path => {
+		switch(path.split('/').at(-1)) {
+			case 'settings.yml':
+				contentSettings = yaml.load(fs.readFileSync(path, 'utf-8').replaceAll('!ruby/regexp', 'ruby/regexp'));
+				break;
+			case 'settings.local.yml':
+				contentSettingsLocal = yaml.load(fs.readFileSync(path, 'utf-8').replaceAll('!ruby/regexp', 'ruby/regexp'));
+				break;
+			case 'test.yml':
+				contentSettingsTest = yaml.load(fs.readFileSync(path, 'utf-8').replaceAll('!ruby/regexp', 'ruby/regexp'));
+				break;
+		}
+	});
+	contentSettingsTest = _.merge({}, contentSettings, contentSettingsTest);
+	contentSettings = _.merge({}, contentSettings, contentSettingsLocal);
+	vscode.window.showInformationMessage('Display HardCode Value: load data done!');
 }
 
-// Get value by command
-function getValueSettings(content, command) {
+// Detect value by command
+function detectValue(content, command) {
 	let arr_split = command.split('.');
 	let tmp = content[arr_split[1]];
 	command_valuable = ['Settings', arr_split[1]];
@@ -129,7 +157,7 @@ function getWordAt (str, pos) {
 
 	let right = str.slice(pos).search(/[!@#\$%\^\&*\)\(+=\/\-\[\]\,\s\{\}\|\\\>\<\?]/);
 
-			// The last word in the string is a special case.
+	// The last word in the string is a special case.
 	if (right < 0) {
 			return str.slice(left);
 	}

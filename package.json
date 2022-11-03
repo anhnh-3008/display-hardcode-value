@@ -5,7 +5,7 @@
   "author": "anhnh",
   "icon": "media/icon.png",
   "publisher": "anhnh-3008",
-  "version": "0.0.5",
+  "version": "0.0.7",
   "engines": {
     "vscode": "^1.72.0"
   },
@@ -18,10 +18,12 @@
   ],
   "main": "./extension.js",
   "contributes": {
-    "commands": [{
-      "command": "display-hardcode-value.display",
-      "title": "Display HardCode Value"
-    }]
+    "commands": [
+      {
+        "command": "display-hardcode-value.display",
+        "title": "Display HardCode Value"
+      }
+    ]
   },
   "scripts": {
     "vscode:prepublish": "npm install",
@@ -30,19 +32,21 @@
     "test": "node ./test/runTest.js"
   },
   "dependencies": {
-    "@types/vscode": "^1.72.0",
     "@types/glob": "^8.0.0",
     "@types/mocha": "^10.0.0",
     "@types/node": "16.x",
+    "@types/vscode": "^1.72.0",
+    "@vscode/test-electron": "^2.1.5",
     "eslint": "^8.24.0",
     "glob": "^8.0.3",
-    "mocha": "^10.0.0",
-    "typescript": "^4.8.4",
     "js-yaml": "^4.1.0",
-    "@vscode/test-electron": "^2.1.5"
+    "lodash": "^4.17.21",
+    "merge-yaml": "^1.1.0",
+    "mocha": "^10.0.0",
+    "typescript": "^4.8.4"
   },
   "repository": {
-		"type": "git",
-		"url": "https://github.com/anhnh-3008/display-hardcode-value"
-	  }
+    "type": "git",
+    "url": "https://github.com/anhnh-3008/display-hardcode-value"
+  }
 }
