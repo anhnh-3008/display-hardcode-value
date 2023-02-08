@@ -26,7 +26,7 @@ function activate(context) {
 	getDataSettings();
 
 	// Handle logic display settings value when hover text
-	vscode.languages.registerHoverProvider('ruby', {
+	vscode.languages.registerHoverProvider(['ruby', 'slim', 'html', 'javascript'], {
 		provideHover(document, position, token) {
 			var command = getWordAt(document.lineAt(position.line).text, position.character);
 			if (command.includes('Settings')) {

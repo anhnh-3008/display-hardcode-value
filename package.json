@@ -14,7 +14,10 @@
   ],
   "activationEvents": [
     "onCommand:display-hardcode-value.display",
-    "onLanguage:ruby"
+    "onLanguage:ruby",
+    "onLanguage:slim",
+    "onLanguage:javascript",
+    "onLanguage:html"
   ],
   "main": "./extension.js",
   "contributes": {
