@@ -1,6 +1,8 @@
 # 🌿 Display Hardcode Value
 🌱 With Ruby on Rails, this extension display your value of key `Settings` when you hover it.
 
+> Can detect with .rb, .slim, .html and .js.
+
 ❤️ Hope this will be useful for you ❤️
 
 ## Demo
@@ -14,4 +16,4 @@
 😍 Thanks for your support!
 
 ---
-🌱 Visit to [my blog](https://nhanh.netlify.app/) if you feel interested
+🌱 [My TILs](https://anhhn.netlify.app/50-til/)
